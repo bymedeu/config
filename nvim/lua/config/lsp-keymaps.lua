@@ -34,20 +34,15 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		)
 
 		vim.keymap.set("n", "K", function()
-			local clients = vim.lsp.get_clients({ bufnr = 0 })
-
-			for _, client in ipairs(clients) do
-				if client.server_capabilities.hoverProvider then
-					vim.lsp.buf.hover({
-						border = "rounded",
-						focusable = false,
-						stylize_markdown = false,
-					})
-					return
-				end
-			end
-
-			vim.notify("No LSP hover provider attached to this buffer", vim.log.levels.WARN)
+			-- Neovim combines hover results from all attached clients. Press K a
+			-- second time to focus the window, scroll it normally, and press q to close.
+			vim.lsp.buf.hover({
+				border = "rounded",
+				max_width = math.floor(vim.o.columns * 0.7),
+				max_height = math.floor(vim.o.lines * 0.5),
+				title = " Documentation ",
+				title_pos = "center",
+			})
 		end, vim.tbl_extend("force", opts, { desc = "Show documentation" }))
 
 		-- Refactoring
