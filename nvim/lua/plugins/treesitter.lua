@@ -3,29 +3,35 @@ return {
 	"nvim-treesitter/nvim-treesitter",
 
 	branch = "main",
+	lazy = false,
 	build = ":TSUpdate",
 
 	config = function()
+		local parsers = {
+			"cpp",
+			"c",
+			"lua",
+			"python",
+			"java",
+			"javascript",
+			"sql",
+			"bash",
+			"cmake",
+			"vim",
+			"vimdoc",
+			"markdown",
+			"markdown_inline",
+			"latex",
+		}
+
 		require("nvim-treesitter").setup({
 			install_dir = vim.fn.stdpath("data") .. "/site",
-
-			ensure_install = {
-				"cpp",
-				"c",
-				"lua",
-				"python",
-				"java",
-				"javascript",
-				"sql",
-				"bash",
-				"cmake",
-				"vim",
-				"vimdoc",
-				"markdown",
-				"markdown_inline",
-				"latex",
-			},
 		})
+
+		-- The current nvim-treesitter main branch uses install(), not the old
+		-- ensure_install option. This keeps the LaTeX parser present for
+		-- render-markdown's math handler.
+		require("nvim-treesitter").install(parsers)
 
 		vim.api.nvim_create_autocmd("FileType", {
 			callback = function(args)

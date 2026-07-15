@@ -24,6 +24,15 @@ return {
 			},
 
 			filesystem = {
+				-- Hide dotfiles by default, with an explicit visible allow-list.
+				filtered_items = {
+					hide_dotfiles = true,
+					always_show = {
+						".git",
+						".gitignore",
+					},
+				},
+
 				follow_current_file = {
 					enabled = true,
 				},

@@ -14,21 +14,18 @@ return {
 		local render_markdown = require("render-markdown")
 
 		render_markdown.setup({
-			enabled = false,
+			-- Load enabled: this plugin is itself lazy-loaded for Markdown buffers,
+			-- so a BufReadPost autocmd registered here is too late for the first file.
+			enabled = true,
 
 			file_types = { "markdown" },
 
 			latex = {
 				enabled = true,
+				-- pylatexenc supplies latex2text on this system. The LaTeX parser,
+				-- installed by the treesitter spec, identifies formulas in Markdown.
 				converter = { "latex2text" },
 			},
-		})
-
-		vim.api.nvim_create_autocmd({ "BufReadPost", "BufNewFile" }, {
-			pattern = { "*.md", "*.markdown" },
-			callback = function()
-				render_markdown.enable()
-			end,
 		})
 
 		vim.keymap.set("n", "<leader>mr", function()

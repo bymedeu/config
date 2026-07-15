@@ -1,0 +1,15 @@
+# Copy this file to private_local.zsh. The copy is ignored by Git.
+# Put machine-specific paths, project defaults, tokens, and secrets there.
+
+# Machine-specific application paths.
+# path=("$HOME/.local/share/Xilinx/Vivado/2024.2/bin" "$path[@]")
+# alias intellij='/opt/idea-IU-253.30387.90/bin/idea &'
+
+# Local PostgreSQL defaults.
+# export PGDATA="$HOME/postgres_data"
+# export PGHOST="/tmp"
+# export PGPORT="5432"
+
+# Secrets should be exported only from a private file.
+# export SOME_API_TOKEN='replace-me'
+

@@ -1,0 +1,3 @@
+# Local/private zsh configuration. Keep credentials and machine-specific paths here.
+/zsh/private_*.zsh
+
