@@ -74,9 +74,8 @@ return {
 			ts_ls = {},
 			ada_ls = {},
 
-			cmake = {
-				cmd = { "cmake-language-server" },
-				filetypes = { "cmake" },
+			neocmake = {
+				root_markers = { "CMakeLists.txt", ".neocmake.toml", ".git", "build", "cmake" },
 			},
 
 			ruff = {

@@ -4,9 +4,10 @@ alias gozsh='zcfg'
 alias gobash='gozsh'
 alias hyprcfg='$EDITOR "${XDG_CONFIG_HOME:-$HOME/.config}/hypr"'
 alias govim='$EDITOR "$HOME/.vimrc"'
-alias nv='nvim .'
+alias nv='nvim'
 alias nivm='nvim'
 alias hx='helix'
+alias nv.='nvim .'
 
 # Development.
 alias cg='cargo'
