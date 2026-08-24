@@ -1,0 +1,28 @@
+{
+    "workbench.colorTheme": "Night Owl",
+    "makefile.configureOnOpen": true,
+    "files.autoSave": "afterDelay",
+    "git.openRepositoryInParentFolders": "always",
+    "security.workspace.trust.untrustedFiles": "open",
+    "explorer.confirmDelete": false,
+    "explorer.confirmDragAndDrop": false,
+    "github.copilot.enable": {
+        "*": false,
+        "plaintext": false,
+        "markdown": false,
+        "scminput": false
+    },
+    "diffEditor.hideUnchangedRegions.enabled": true,
+    "[c]": {
+        "editor.defaultFormatter": "ms-vscode.cpptools"
+    },
+    "editor.minimap.maxColumn": 80,
+    "editor.wordWrap": "on",
+    "editor.rulers": [
+        80
+    ],
+    "github.copilot.nextEditSuggestions.enabled": true,
+    "git.confirmSync": false,
+    "files.insertFinalNewline": true,
+    "files.trimFinalNewlines": true
+}

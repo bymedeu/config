@@ -1,0 +1,18 @@
+/* Swaync */
+@define-color active #ec775c;
+@define-color background_dark #1c2128;
+@define-color background_light #22272e;
+@define-color background_transparent alpha(#18191c, 0.7);
+@define-color foreground #e4e8ed;
+@define-color border #444C56;
+@define-color alert #ea4545;
+
+
+/* Waybar */
+@define-color foreground #e4e8ed;
+@define-color background #18191c;
+
+/* @define-color accentColor #b6c8d3; */
+@define-color accentColor #ec775c;
+
+@define-color charging #6bc46d;

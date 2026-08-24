@@ -1,0 +1,44 @@
+#!/bin/sh
+
+airplane_mode_is_active() {
+    wifi_blocked=0
+    bluetooth_blocked=0
+
+    for radio_dir in /sys/class/rfkill/rfkill*; do
+        [ -r "$radio_dir/type" ] || continue
+        radio_type=$(sed -n '1p' "$radio_dir/type")
+        radio_soft_block=$(sed -n '1p' "$radio_dir/soft")
+
+        case "$radio_type" in
+            wlan|wifi)
+                [ "$radio_soft_block" = "1" ] && wifi_blocked=1
+                ;;
+            bluetooth)
+                [ "$radio_soft_block" = "1" ] && bluetooth_blocked=1
+                ;;
+        esac
+    done
+
+    [ "$wifi_blocked" = "1" ] && [ "$bluetooth_blocked" = "1" ]
+}
+
+case ${1:-status} in
+    check)
+        airplane_mode_is_active
+        ;;
+    status)
+        if airplane_mode_is_active; then
+            printf '%s\n' '{"text":"󰀝","tooltip":"Airplane mode is on · Click to restore Wi-Fi and Bluetooth","class":"active"}'
+        fi
+        ;;
+    disable)
+        rfkill unblock all
+        nmcli radio wifi on >/dev/null 2>&1 || true
+        bluetoothctl power on >/dev/null 2>&1 || true
+        pkill -RTMIN+10 waybar >/dev/null 2>&1 || true
+        ;;
+    *)
+        printf 'Usage: %s {check|status|disable}\n' "$0" >&2
+        exit 2
+        ;;
+esac

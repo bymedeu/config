@@ -14,7 +14,12 @@ return {
 		})
 
 		vim.keymap.set("n", "<leader>cd", function()
-			require("neogen").generate()
-		end, { desc = "Generate documentation" })
+			local opts = {}
+			if vim.bo.filetype == "c" or vim.bo.filetype == "cpp" then
+				opts.annotation_convention = "doxygen"
+			end
+
+			require("neogen").generate(opts)
+		end, { desc = "Generate Doxygen/documentation" })
 	end,
 }

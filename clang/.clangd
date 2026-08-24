@@ -1,0 +1,7 @@
+---
+Documentation:
+  CommentFormat: Doxygen
+Diagnostics:
+  MissingIncludes: Strict
+  UnusedIncludes: Strict
+...

@@ -1,0 +1,38 @@
+#!/bin/sh
+
+set -eu
+
+if [ "$#" -eq 0 ]; then
+    echo "Usage: $0 REPOSITORY..." >&2
+    exit 2
+fi
+
+config_dir=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+
+for repository in "$@"; do
+    if [ ! -d "$repository" ]; then
+        echo "Not a directory: $repository" >&2
+        exit 1
+    fi
+
+    repository=$(CDPATH= cd -- "$repository" && pwd)
+
+    if [ ! -e "$repository/.git" ]; then
+        echo "Not a Git repository root: $repository" >&2
+        exit 1
+    fi
+
+    for filename in .clang-format .clang-tidy .clangd; do
+        destination="$repository/$filename"
+        source="$config_dir/$filename"
+
+        if [ -e "$destination" ] && [ ! -L "$destination" ]; then
+            echo "Refusing to replace regular file: $destination" >&2
+            exit 1
+        fi
+
+        relative_source=$(realpath --relative-to="$repository" "$source")
+        ln -sfn "$relative_source" "$destination"
+        echo "$destination -> $relative_source"
+    done
+done

@@ -1,3 +1,84 @@
-# Local/private zsh configuration. Keep credentials and machine-specific paths here.
-/zsh/private_*.zsh
+# Deny-by-default: only allowlisted trees are public.
+# Anything a new app dumps into ~/.config stays untracked.
+#
+# Un-ignore directory names with no trailing slash so Git treats both
+# real directories and (during migration) symlink names as allowlisted.
 
+/*
+
+!/.gitignore
+!/README.md
+
+!/nvim
+!/nvim/**
+
+!/zsh
+!/zsh/**
+
+!/clang
+!/clang/**
+
+!/hypr
+!/hypr/**
+
+!/kitty
+!/kitty/**
+
+!/waybar
+!/waybar/**
+
+!/rofi
+!/rofi/**
+
+!/swaync
+!/swaync/**
+
+!/fnott
+!/fnott/**
+
+!/fastfetch
+!/fastfetch/**
+
+!/scripts
+!/scripts/**
+
+!/htop
+!/htop/**
+
+!/colors
+!/colors/**
+
+!/vscode
+!/vscode/**
+
+!/electron-flags.conf
+!/codium-flags.conf
+
+# Nvim runtime
+nvim/nvim.log
+nvim/*.log
+
+# Zsh machine overlay and secrets
+zsh/private_*.zsh
+
+# Hyprland machine overlay, photos, and runtime state
+hypr/local/monitors.conf
+hypr/local/hyprland.conf
+hypr/assets/*
+!hypr/assets/README.md
+!hypr/assets/.gitkeep
+hypr/images/*
+!hypr/images/README.md
+hypr/status/
+hypr/config/monitors/perso.conf
+hypr/config/monitors.conf
+hypr/monitors.conf
+hypr/application-style.conf
+hypr/workspaces.conf
+
+# Fastfetch local logo and leftover copies
+fastfetch/logo.png
+fastfetch/old.jsonc
+
+# Editor / notification backups
+swaync/*.old
