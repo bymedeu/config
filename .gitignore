@@ -62,19 +62,19 @@ nvim/*.log
 zsh/private_*.zsh
 
 # Hyprland machine overlay, photos, and runtime state
-hypr/local/monitors.conf
-hypr/local/hyprland.conf
+hypr/local/monitors.lua
+hypr/local/hyprland.lua
 hypr/assets/*
 !hypr/assets/README.md
 !hypr/assets/.gitkeep
 hypr/images/*
 !hypr/images/README.md
 hypr/status/
-hypr/config/monitors/perso.conf
-hypr/config/monitors.conf
-hypr/monitors.conf
-hypr/application-style.conf
-hypr/workspaces.conf
+hypr/config/monitors/perso.lua
+hypr/config/monitors.lua
+hypr/monitors.lua
+hypr/application-style.lua
+hypr/workspaces.lua
 
 # Fastfetch local logo and leftover copies
 fastfetch/logo.png

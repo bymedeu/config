@@ -1,8 +1,9 @@
 #!/bin/sh
 
-# This script is launched on every hyprland startup
-# Please note that it is intended for desktop related programs ONLY, as it will be called every time you reload the desktop
-# If you want to add your own applications you may rather want to use exec-once in the environment.conf file
+# This script is launched once at the start of each Hyprland session.
+# It is intended for desktop-related programs only.
+# If you want to add your own applications, prefer the hyprland.start handler
+# in config/environment.lua.
 
 hyprpaper &
 hyprpm reload &

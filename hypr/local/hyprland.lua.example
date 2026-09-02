@@ -1,0 +1,6 @@
+-- Machine-specific Hyprland overlay. Copy this file to hyprland.lua
+-- (gitignored). The default is the portable fallback; switch to
+-- local.monitors after copying monitors.lua.example for a custom layout.
+
+require("config.monitors.default")
+-- require("local.monitors")

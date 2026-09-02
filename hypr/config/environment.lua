@@ -1,0 +1,16 @@
+-- Programs started once per Hyprland session.
+hl.on("hyprland.start", function()
+    hl.exec_cmd("~/.config/hypr/scripts/autostart.sh")
+    hl.exec_cmd("wl-paste --type text --watch cliphist store")
+    hl.exec_cmd("wl-paste --type image --watch cliphist store")
+    hl.exec_cmd("dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE XDG_SESSION_DESKTOP")
+    hl.exec_cmd("systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE XDG_SESSION_DESKTOP")
+    hl.exec_cmd("systemctl --user start hyprland-session.target")
+end)
+
+hl.env("HYPRCURSOR_THEME", "VolantesCursors")
+hl.env("XCURSOR_THEME", "VolantesCursors")
+hl.env("XCURSOR_SIZE", "24")
+hl.env("HYPRCURSOR_SIZE", "24")
+hl.env("XDG_SESSION_DESKTOP", "Hyprland")
+hl.env("XDG_CURRENT_DESKTOP", "Hyprland")

@@ -23,15 +23,15 @@ Clone or pull into `~/.config`, then:
 ```sh
 cp ~/.config/zsh/home.zshrc ~/.zshrc
 cp ~/.config/zsh/private_local.zsh.example ~/.config/zsh/private_local.zsh
-cp ~/.config/hypr/local/hyprland.conf.example ~/.config/hypr/local/hyprland.conf
+cp ~/.config/hypr/local/hyprland.lua.example ~/.config/hypr/local/hyprland.lua
 ```
 
-The copied `local/hyprland.conf` sources the public default monitor
+The copied `local/hyprland.lua` requires the public default monitor
 preset. For a custom desk layout:
 
 ```sh
-cp ~/.config/hypr/local/monitors.conf.example ~/.config/hypr/local/monitors.conf
-# edit monitors.conf, then source it from local/hyprland.conf instead of default.conf
+cp ~/.config/hypr/local/monitors.lua.example ~/.config/hypr/local/monitors.lua
+# edit monitors.lua, then require it from local/hyprland.lua instead of the default module
 ```
 
 Drop `wallpaper.jpg` and `lockscreen.jpg` into [`hypr/images/`](hypr/images/).

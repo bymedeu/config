@@ -38,9 +38,9 @@ alias vencord-update='sh -c "$(curl -sS https://vencord.dev/install.sh)"'
 
 # eza replacements; prefix with a backslash to bypass an alias (for example, \ls).
 if (( $+commands[eza] )); then
-  alias ls='eza --icons=automatic --tree --level=1 --follow-symlinks --no-quotes'
+  alias ls='eza --icons=auto --tree --level=1 --follow-symlinks --no-quotes'
   alias lsa='ls -a'
-  alias lsl='eza --icons=automatic --long --header --group -M'
+  alias lsl='eza --icons=auto --long --header --group -M'
   alias tree='ls --level=3'
 fi
 
