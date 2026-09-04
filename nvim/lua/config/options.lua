@@ -3,7 +3,8 @@
 vim.opt.number = true
 vim.opt.relativenumber = true
 
-vim.opt.clipboard = "unnamedplus"
+-- Keep regular copy/paste (+) and middle-click selection (*) in sync.
+vim.opt.clipboard = { "unnamed", "unnamedplus" }
 
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4

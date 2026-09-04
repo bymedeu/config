@@ -1,5 +1,10 @@
 -- file keymaps.lua
 
+-- Copy a mouse selection as soon as the button is released. Since both
+-- clipboard providers are enabled, this is available to Ctrl-V and
+-- middle-click paste alike.
+vim.keymap.set("x", "<LeftRelease>", "<LeftRelease>y", { remap = false, desc = "Copy mouse selection" })
+
 vim.keymap.set("n", "<leader>e", function()
 	vim.cmd("Neotree focus")
 end, { desc = "Open file tree" })

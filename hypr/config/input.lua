@@ -3,6 +3,12 @@ local main_mod = "SUPER"
 
 hl.config({
     input = {
+        -- Framework built-in keyboard: standard Canadian French QWERTY.
+        kb_layout = "ca",
+        kb_variant = "fr",
+        kb_model = "",
+        kb_options = "",
+        kb_rules = "",
         numlock_by_default = true,
         follow_mouse = 1,
         sensitivity = 0.1,
@@ -19,6 +25,16 @@ hl.config({
 hl.device({
     name = "epic-mouse-v1",
     sensitivity = -0.5,
+})
+
+-- AJAZZ AK820 Pro over Bluetooth: physical US QWERTY.
+hl.device({
+    name = "ak820-5.1-1-keyboard",
+    kb_layout = "us",
+    kb_variant = "",
+    kb_model = "",
+    kb_options = "",
+    kb_rules = "",
 })
 
 -- Main desktop controls.
@@ -48,8 +64,7 @@ hl.bind(main_mod .. " + V", hl.dsp.layout("togglesplit"))
 hl.bind(main_mod .. " + T", hl.dsp.window.float())
 hl.bind(main_mod .. " + H", hl.dsp.window.pseudo())
 
--- QWERTY workspace keys are always available. The selected keyboard module
--- adds the matching number-row symbols for the active layout as well.
+-- Both configured layouts are QWERTY and have an unshifted number row.
 for workspace = 1, 10 do
     local key = tostring(workspace % 10)
     hl.bind(main_mod .. " + " .. key, hl.dsp.focus({ workspace = workspace }))
@@ -100,4 +115,3 @@ hl.bind(main_mod .. " + SHIFT + S", hl.dsp.exec_cmd("~/.config/hypr/scripts/hypr
 hl.bind(main_mod .. " + CONTROL + S", hl.dsp.exec_cmd("~/.config/hypr/scripts/hyprshot-temp.sh --save"))
 hl.bind(main_mod .. " + SHIFT + C", hl.dsp.exec_cmd("hyprpicker -a"))
 hl.bind("SUPER + CONTROL + XF86TouchpadToggle", hl.dsp.exec_cmd("~/.config/hypr/scripts/toggle-touchpad.sh"))
-hl.bind(main_mod .. " + CONTROL + SPACE", hl.dsp.exec_cmd("~/.config/hypr/scripts/change-kb-layout.sh"))

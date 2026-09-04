@@ -12,6 +12,11 @@
 
 /*--------------- Notifications ---------------*/
 
+.floating-notifications,
+.blank-window {
+  background: transparent;
+}
+
 
 .floating-notifications.background .notification-row {
   padding: 0.5rem;
@@ -482,5 +487,4 @@ trough slider:hover {
 .widget-buttons-grid > flowbox > flowboxchild > button.toggle:checked label {
     color: @background;
 }
-
 
