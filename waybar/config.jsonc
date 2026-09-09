@@ -9,6 +9,7 @@
   "modules-left": [
     //"custom/updates",
     "hyprland/workspaces",
+    "custom/scratchpad",
     "hyprland/submap",
     "group/info"
     //"hyprland/window"
@@ -48,6 +49,14 @@
       "9": "9",
       "10": "10"
     }
+  },
+  "custom/scratchpad": {
+    "exec": "sh ~/.config/waybar/scripts/scratchpad.sh",
+    "return-type": "json",
+    "hide-empty-text": true,
+    "interval": 1,
+    "on-click": "hyprctl dispatch togglespecialworkspace magic",
+    "tooltip": true
   },
   "hyprland/submap": {
     "format": "<b>󰇘</b>",

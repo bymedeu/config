@@ -204,6 +204,25 @@ tooltip label {
   border-radius: 2px;
 }
 
+#custom-scratchpad {
+  font-size: 19px;
+  font-weight: normal;
+  margin: 0px 2px 2px 2px;
+  padding: 2px 0px;
+  border-radius: 2px;
+  color: alpha(@foreground, 0.3);
+}
+
+#custom-scratchpad:hover {
+  background: alpha(@active, 0.2);
+  color: @foreground;
+}
+
+#custom-scratchpad.active {
+  background: alpha(@active, 0.4);
+  color: @foreground;
+}
+
 #network.wifi {
   margin: 2px;
 }
