@@ -81,6 +81,7 @@ tooltip label {
   border: 1px solid alpha(darker(@active), 0.0);
 }
 #custom-recorder,
+#custom-brightness,
 #connection,
 #cnoti,
 #brightness,

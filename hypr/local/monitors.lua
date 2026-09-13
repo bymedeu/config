@@ -1,84 +1,82 @@
--- Desk layout: Iiyama (left), Samsung (main), laptop (right, normally off).
-local main = "Samsung Electric Company LC24RG50 H4LRC04222"
-local secondary = "Iiyama North America PL2474H 1166900301295"
+-- Desk layout: Iiyama (left), Samsung (middle), laptop (main, right).
+local middle = "Samsung Electric Company LC24RG50 H4LRC04222"
+local left = "Iiyama North America PL2474H 1166900301295"
 
 hl.monitor({
-    output = "desc:" .. main,
-    mode = "1920x1080@60",
-    position = "0x0",
-    scale = 1,
+	output = "desc:" .. middle,
+	mode = "1920x1080@60",
+	position = "0x0",
+	scale = 1,
 })
 
 -- Iiyama PL2474H to the left of the main screen.
 hl.monitor({
-    output = "desc:Iiyama North America PL2474H 1166900301295",
-    mode = "1920x1080@60",
-    position = "-1920x0",
-    scale = 1,
+	output = "desc:" .. left,
+	mode = "1920x1080@60",
+	position = "-1920x0",
+	scale = 1,
 })
 
-hl.config({ cursor = { default_monitor = "desc:" .. main } })
-hl.workspace_rule({ workspace = "1", monitor = "desc:" .. main })
-hl.workspace_rule({ workspace = "2", monitor = "desc:" .. main, default = true })
-hl.workspace_rule({ workspace = "3", monitor = "desc:" .. secondary, default = true })
+-- Keep the laptop in the layout. DPMS blanks it without changing the layout;
+-- only the explicit shortcut should wake it again.
+hl.monitor({
+	output = "eDP-1",
+	mode = "2880x1920@120",
+	position = "1920x0",
+	scale = 2,
+})
 
-local laptop_override = nil
-local last_layout = nil
-local last_laptop_rule = nil
+hl.config({
+	cursor = { default_monitor = "eDP-1" },
+	misc = { mouse_move_enables_dpms = false },
+})
+local initial_workspace_rules = {
+	hl.workspace_rule({ workspace = "2", monitor = "desc:" .. left, default = true }),
+	hl.workspace_rule({ workspace = "1", monitor = "desc:" .. middle, default = true }),
+	hl.workspace_rule({ workspace = "10", monitor = "eDP-1", default = true }),
+}
 
-local function update_laptop()
-    local has_main, has_secondary, external_count = false, false, 0
-    for _, monitor in ipairs(hl.get_monitors()) do
-        if monitor.name ~= "eDP-1" then
-            external_count = external_count + 1
-        end
-        has_main = has_main or monitor.description == main
-        has_secondary = has_secondary or monitor.description == secondary
-    end
-
-    local layout = tostring(has_main) .. ":" .. tostring(has_secondary) .. ":" .. external_count
-    if layout ~= last_layout then
-        laptop_override = nil
-        last_layout = layout
-    end
-    local enabled = not (has_main and has_secondary)
-    if laptop_override ~= nil then enabled = laptop_override end
-    -- Never leave an undocked laptop without a usable screen.
-    if external_count == 0 then enabled = true end
-    local position = has_main and "1920x0" or "0x0"
-    local rule = tostring(enabled) .. ":" .. position
-    if rule == last_laptop_rule then return end
-    last_laptop_rule = rule
-    hl.monitor({
-        output = "eDP-1",
-        mode = "2880x1920@120",
-        position = position,
-        scale = 2,
-        disabled = not enabled,
-    })
+-- Use the monitor rules only to establish the initial layout. Afterwards the
+-- workspaces remain movable between monitors.
+local function unlock_initial_workspaces()
+	for _, rule in ipairs(initial_workspace_rules) do
+		rule:set_enabled(false)
+	end
 end
-
--- Defer until hotplug processing finishes; unchanged rules are not reapplied.
-local layout_timer = hl.timer(update_laptop, { timeout = 300, type = "oneshot" })
-hl.on("monitor.layout_changed", function()
-    layout_timer:set_timeout(300)
-    layout_timer:set_enabled(true)
-end)
-hl.on("hyprland.start", update_laptop)
-
-local function toggle_laptop()
-    laptop_override = hl.get_monitor("eDP-1") == nil
-    update_laptop()
+local workspace_unlock_timer = nil
+local function schedule_workspace_unlock()
+	if workspace_unlock_timer ~= nil then
+		workspace_unlock_timer:set_enabled(false)
+	end
+	for _, rule in ipairs(initial_workspace_rules) do
+		rule:set_enabled(true)
+	end
+	workspace_unlock_timer = hl.timer(unlock_initial_workspaces, { timeout = 1500, type = "oneshot" })
 end
-hl.bind("SUPER + SHIFT + P", toggle_laptop, { description = "Toggle laptop screen on the right" })
+schedule_workspace_unlock()
+hl.on("hyprland.start", schedule_workspace_unlock)
 
-update_laptop()
+local dpms_toggle_timer = nil
+
+local function toggle_laptop_dpms()
+	local laptop = hl.get_monitor("eDP-1")
+	if laptop == nil then
+		return
+	end
+	local action = laptop.dpms_status and "disable" or "enable"
+	dpms_toggle_timer = hl.timer(function()
+		hl.dispatch(hl.dsp.dpms({ monitor = "eDP-1", action = action }))
+	end, { timeout = 100, type = "oneshot" })
+end
+hl.bind("SUPER + SHIFT + P", toggle_laptop_dpms, {
+	description = "Toggle the laptop screen",
+})
 
 hl.monitor({
-    output = "*",
-    mode = "preferred",
-    position = "auto",
-    scale = "auto",
+	output = "*",
+	mode = "preferred",
+	position = "auto",
+	scale = "auto",
 })
 
-return { toggle_laptop = toggle_laptop }
+return { toggle_laptop_dpms = toggle_laptop_dpms }

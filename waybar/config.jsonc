@@ -19,7 +19,7 @@
     "custom/recorder",
     "custom/privacy-dot",
     "privacy",
-    "group/brightness",
+    "custom/brightness",
     "group/sound",
     "group/connection",
     "tray",
@@ -164,48 +164,15 @@
     "hide-empty-text": true,
     "interval": 1
   },
-  "group/brightness": {
-    "orientation": "inherit",
-    "drawer": {
-      "transition-duration": 500,
-      "transition-left-to-right": false
-    },
-    "modules": [
-      "backlight"
-      //"backlight/slider"
-    ]
-  },
-  "backlight": {
-    "device": "intel_backlight",
-    "format": "{icon}",
-    "format-icons": [
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      ""
-    ],
+  "custom/brightness": {
+    "exec-if": "hyprctl -j monitors | jq -e 'any(.[]; .name == \"eDP-1\" and .dpmsStatus)' >/dev/null",
+    "exec": "~/.config/waybar/scripts/brightness.sh",
+    "return-type": "json",
+    "interval": 2,
     "on-scroll-down": "brightnessctl s 5%-",
     "on-scroll-up": "brightnessctl s +5%",
-    "tooltip": true,
-    "tooltip-format": "Brightness: {percent}% ",
-    "smooth-scrolling-threshold": 1
-  },
-  "backlight/slider": {
-    "min": 1,
-    "max": 100,
-    "orientation": "vertical",
-    "device": "intel_backlight"
+    "smooth-scrolling-threshold": 1,
+    "tooltip": true
   },
   "group/sound": {
     "orientation": "inherit",
