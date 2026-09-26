@@ -33,6 +33,7 @@ alias daudio='systemctl --user restart wireplumber'
 alias wlc='wl-copy'
 alias pacman='sudo pacman'
 alias vencord-update='sh -c "$(curl -sS https://vencord.dev/install.sh)"'
+alias dcodex='CODEX_HOME="$HOME/.codex-second" codex'
 
 (( $+commands[kitten] )) && alias icat='kitten icat'
 
