@@ -1,4 +1,8 @@
 ---
+CompileFlags:
+  # clangd reads GCC's compilation database but does not understand this
+  # GCC-only C++26 reflection driver flag.
+  Remove: [-freflection]
 Documentation:
   CommentFormat: Doxygen
 Diagnostics:
