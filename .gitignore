@@ -82,3 +82,6 @@ fastfetch/old.jsonc
 
 # Editor / notification backups
 swaync/*.old
+
+# Local process-viewer history
+htop/htop_history
