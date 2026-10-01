@@ -1,0 +1,108 @@
+/*
+ * original author: Manuel Schneider <https://github.com/ManuelSchneid3r>
+ * modified by : Gu://em_
+ *
+ * Check http://doc.qt.io/qt-5/stylesheet-syntax.html especially the subtopics:
+ * The Style Sheet Syntax (http://doc.qt.io/qt-5/stylesheet-syntax.html)
+ * Qt Style Sheets Reference (http://doc.qt.io/qt-5/stylesheet-reference.html)
+ */
+
+* {
+    border: none;
+    color: #98C1D9;
+    background-color: #293241;
+}
+
+#frame {
+    background-color: none;
+    border: none;
+    max-width:640px;
+    min-width:640px;
+    padding: 10px; /* to have a drag handle */
+}
+
+
+#inputLine {
+    border-radius: 8px;
+    border: 1px solid #4C566A;
+    color: #EE6C4D;
+    font-size: 26px;
+    padding: 8px;
+    selection-background-color: #EE6C4D;
+    selection-color: #E0FBFC;
+}
+
+
+#settingsButton {
+    background-color: none;
+    color: #4C566A;
+
+    max-height: 13px;
+    max-width: 13px;
+    min-height: 13px;
+    min-width: 13px;
+
+    padding: 16px;
+}
+
+
+QListView {
+    border-radius: 8px;
+    border: 1px solid #4C566A;
+    color: #E0FBFC;
+    margin-top: 4px;
+    selection-background-color: #3D5A80;
+    selection-color: #E0FBFC;
+}
+
+QListView::item {
+    border-radius: 6px;
+    padding: 4px;
+}
+
+QListView::item:selected {
+    background-color: #3D5A80;
+}
+
+
+QListView#resultsList {
+    font-size: 20px;
+    icon-size: 34px;
+    padding: 4px 8px 4px 8px;
+}
+
+QListView#resultsList::item {
+    margin: 4px 0px 4px 0px;
+    height: 44px;
+}
+
+
+QListView#actionList {
+    font-size: 16px;
+    padding: 6px 8px 6px 8px;
+}
+
+QListView#actionList::item {
+    margin: 2px 0px 2px 0px;
+}
+
+
+QListView QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical,
+QListView QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical,
+QListView QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+    background: transparent;
+    border: 0px;
+    height: 0px;
+    width: 0px;
+}
+
+QListView QScrollBar:vertical {
+    background: transparent;
+    margin: 8px 0px 8px 0px;
+    width: 2px;
+}
+
+QListView QScrollBar::handle:vertical {
+    background: #4C566A;
+    min-height: 24px;
+}

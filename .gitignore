@@ -85,3 +85,17 @@ swaync/*.old
 
 # Local process-viewer history
 htop/htop_history
+
+!/albert/
+/albert/**
+!/albert/
+!/albert/config
+!/albert/
+!/albert/websearch/
+!/albert/websearch/engines.json
+!/albert/
+!/albert/schemes/
+!/albert/schemes/Seventy Eight.qss
+!/albert/
+!/albert/themes/
+!/albert/themes/Waybar.ini
