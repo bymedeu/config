@@ -157,3 +157,9 @@ htop/htop_history
 !/scripts/bin/set-wallpaper
 
 !/config.json
+
+!/install.py
+
+!/links.json
+
+!/README.md
