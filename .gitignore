@@ -155,3 +155,5 @@ htop/htop_history
 !/scripts/
 !/scripts/bin/
 !/scripts/bin/set-wallpaper
+
+!/config.json
