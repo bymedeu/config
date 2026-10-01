@@ -1,0 +1,53 @@
+#!/bin/sh
+
+# Actually just a modified version of the set-wallpaper script, explaining some potential inconsistencies in variables naming or whatever else.
+
+print_help() {
+    echo "Usage: $0 [input-file]"
+    echo
+    echo "Changes your current lockscreen wallpaper"
+    echo "Please note that this script is made to be used with the Atlas Desktop and will probably not work on most other desktops."
+}
+
+if [ $# -ne 1 ]; then
+    print_help
+    exit 1
+fi
+
+# Check if file exists
+if [ -e "$1" ]; then
+
+    # Variables declaration
+    wallpaper_config=~/.config/hypr/hyprlock.conf
+    wallpaper_path=~/.config/hypr/images/lockscreen # Doesn't contain file extension
+    file_extension="${1##*.}"
+
+    # In case file has no extension
+    if [ "${file_extension}" == "$1" ]; then
+        echo "Error: please provide a file extension (ex: .jpg, .png...)"
+        exit 1
+    fi
+
+    # Remove old wallpaper
+    rm $wallpaper_path*
+
+    # Copy file
+    cp "$1" "${wallpaper_path}.${file_extension}"
+    if [ $? != 0 ]; then
+        echo "Aborted."
+        exit 1
+    fi
+    
+    # Update config
+    sed -i "s/lockscreen\.[^[:space:]]*/lockscreen.$file_extension/g" $wallpaper_config # Replace current extension by new extension
+    if [ $? != 0 ]; then
+        echo "Aborted."
+        exit 1
+    fi
+
+    echo "Done"
+    exit 0
+else
+    echo "Couldn't find '${1}': No such file or directory"
+    exit 1
+fi
