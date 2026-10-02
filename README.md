@@ -18,24 +18,29 @@ GitHub CLI auth (`gh/`) is not in this repo. On a new machine, run
 
 ## New machine
 
-Clone or pull into `~/.config`, then:
+Clone or pull into `~/.config`, then restore the public links and your private
+settings in this order:
 
 ```sh
 python3 ~/.config/install.py
+git clone git@github.com:bymedeu/config-private.git ~/config-private
+python3 ~/config-private/install.py
+```
+
+If `~/config-private` is already cloned, use that checkout instead of cloning
+again. The private installer restores your monitor layout, local paths and
+wallpaper/lockscreen images. Do not copy example overlays over those files.
+
+If you intentionally have no private repository, create the example overlays
+instead:
+
+```sh
 cp ~/.config/zsh/private_local.zsh.example ~/.config/zsh/private_local.zsh
 cp ~/.config/hypr/local/hyprland.lua.example ~/.config/hypr/local/hyprland.lua
 ```
 
-The copied `local/hyprland.lua` requires the public default monitor
-preset. For a custom desk layout:
-
-```sh
-cp ~/.config/hypr/local/monitors.lua.example ~/.config/hypr/local/monitors.lua
-# edit monitors.lua, then require it from local/hyprland.lua instead of the default module
-```
-
-Drop `wallpaper.jpg` and `lockscreen.jpg` into [`hypr/images/`](hypr/images/).
-That folder is gitignored except its README.
+That alternative uses the public default monitor preset. Add your own images
+under `hypr/images/` and adapt monitor settings for the new machine.
 
 VS Code / Codium: copy [`vscode/settings.json`](vscode/settings.json) into
 `Code/User/settings.json` (or the equivalent Codium/Cursor user folder).
