@@ -18,29 +18,27 @@ GitHub CLI auth (`gh/`) is not in this repo. On a new machine, run
 
 ## New machine
 
-Clone or pull into `~/.config`, then restore the public links and your private
-settings in this order:
+Clone this repository into `~/.config` and install its links:
 
 ```sh
+git clone https://github.com/bymedeu/config.git ~/.config
 python3 ~/.config/install.py
-git clone git@github.com:bymedeu/config-private.git ~/config-private
-python3 ~/config-private/install.py
 ```
 
-If `~/config-private` is already cloned, use that checkout instead of cloning
-again. The private installer restores your monitor layout, local paths and
-wallpaper/lockscreen images. Do not copy example overlays over those files.
+If it is already cloned, run the installer from that checkout. An existing
+nonempty `~/.config` must be backed up or reconciled before cloning.
 
-If you intentionally have no private repository, create the example overlays
-instead:
+Optional machine settings can be created from the examples. Copy only files
+that do not already exist, so existing local settings are preserved:
 
 ```sh
-cp ~/.config/zsh/private_local.zsh.example ~/.config/zsh/private_local.zsh
-cp ~/.config/hypr/local/hyprland.lua.example ~/.config/hypr/local/hyprland.lua
+cp -n ~/.config/zsh/private_local.zsh.example ~/.config/zsh/private_local.zsh
+cp -n ~/.config/hypr/local/hyprland.lua.example ~/.config/hypr/local/hyprland.lua
 ```
 
-That alternative uses the public default monitor preset. Add your own images
-under `hypr/images/` and adapt monitor settings for the new machine.
+The default monitor preset works without an overlay. Add your own images under
+`hypr/images/` and adapt local monitor settings for the machine. Local overlays
+are optional, gitignored files that you manage independently.
 
 VS Code / Codium: copy [`vscode/settings.json`](vscode/settings.json) into
 `Code/User/settings.json` (or the equivalent Codium/Cursor user folder).
@@ -55,13 +53,6 @@ Albert, its Waybar theme and web searches, GTK/COSMIC appearance, Vim, and the c
 
 `python3 ~/.config/install.py` links the home Zsh/Vim entry points, Albert's theme under ~/.local/share, and the portable command helpers under ~/.local/bin. It checks all targets first, accepts absent or identical regular files, and refuses conflicting content or unrelated links. Running it again is safe. No helper is executed during installation. Older system patch helpers are preserved, not recommended as installation steps.
 
-Install your own private overlays after the public configuration:
-
-```sh
-git clone git@github.com:bymedeu/config-private.git ~/config-private
-python3 ~/config-private/install.py
-```
-
-That restores monitor settings, private paths, desktop image assets and hardware-specific helpers. The old ~/dotfiles is no longer required by the consolidated files; it has been left in place for rollback. Downloaded programs such as agy, Claude, Codex, Conan and Mermaid CLI must be reinstalled separately.
+Downloaded programs such as agy, Claude, Codex, Conan and Mermaid CLI must be reinstalled separately.
 
 Application dependencies are not installed by these scripts: keep Albert, Kitty, GTK's adw-gtk3-dark theme, Adwaita icons, VolantesCursors, Hyprland/Hyprlock/Hyprpaper, the existing fonts and your usual Vim/Neovim plugin managers. Existing keyboard, lock, screenshot, Neovim and Zsh behaviour is unchanged.
