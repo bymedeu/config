@@ -1,0 +1,5 @@
+# Explicit setup only; hooks never install packages.
+pre-commit==4.7.0
+clang-format==23.1.1
+ruff==0.16.10
+lizard==1.24.2

@@ -1,0 +1,37 @@
+# Native pre-commit selection. All tools are preinstalled, offline, system hooks.
+exclude: '(^|/)(vendor|third_party|generated|build|_deps|node_modules|\.venv|\.quality-venv)/'
+repos:
+  - repo: local
+    hooks:
+      - id: clang-format
+        name: clang-format
+        language: system
+        entry: git-quality-format
+        types_or: [c, c++]
+        stages: [pre-commit]
+      - id: ruff-format
+        name: Ruff format
+        language: system
+        entry: ruff format
+        types_or: [python, pyi]
+        stages: [pre-commit]
+      - id: cppcheck
+        name: cppcheck
+        language: system
+        entry: git-quality-cppcheck
+        types_or: [c, c++]
+        require_serial: true
+        stages: [pre-push]
+      - id: lizard
+        name: Lizard physical length and complexity
+        language: system
+        entry: lizard -L40 -C10
+        types_or: [c, c++, python, pyi]
+        require_serial: true
+        stages: [pre-push]
+      - id: ruff-check
+        name: Ruff check
+        language: system
+        entry: ruff check
+        types_or: [python, pyi]
+        stages: [pre-push]

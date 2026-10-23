@@ -1,0 +1,5 @@
+#!/bin/sh
+set -eu
+source_dir=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
+data_dir=${XDG_DATA_HOME:-"$HOME/.local/share"}/git-quality
+exec "$data_dir/venv/bin/python" "$source_dir/dispatch.py" "$(basename -- "$0")" "$@"
